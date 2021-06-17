@@ -2,6 +2,7 @@ player1_name = localStorage.getItem("player1_name");
 player2_name = localStorage.getItem("player2_name");
 player1_score = 0;
 player2_score = 0;
+var num_1, num_2;
 
 document.getElementById("player1_name").innerHTML = player1_name + ": ";
 document.getElementById("player2_name").innerHTML = player2_name + ": ";
@@ -11,33 +12,22 @@ document.getElementById("player2_score").innerHTML = player2_score;
 document.getElementById("player_question").innerHTML = "Question Turn: " + player1_name;
 document.getElementById("player_answer").innerHTML = "Answer Turn: " + player2_name;
 
+document.getElementById("player_question").innerHTML = "Question Turn: " + player1_name;
+document.getElementById("player_answer").innerHTML = "Answer Turn: " + player2_name;
+
 function send(){
-    get_word = document.getElementById("word").value;
-    word = get_word.toLowerCase();
-    console.log("word in lowercase = " + word);
+    num_1 = document.getElementById("num1").value;
+    num_2 = document.getElementById("num2").value;
+    console.log("num1 = " + num1);
+    console.log("num2 = " + num2);
 
-    charAt1 = word.charAt(1);
-    console.log(charAt1);
-
-    length_divide_2 = Math.floor(word.length / 2);
-    charAt2 = word.charAt(length_divide_2);
-    console.log(charAt2);
-
-    length_minus_1 = word.length - 1;
-    charAt3 = word.charAt(length_minus_1);
-    console.log("charAt3");
-
-    remove_charAt1 = word.replace(charAt1, "_");
-    remove_charAt2 = remove_charAt1.replace(charAt2, "_");
-    remove_charAt3 = remove_charAt2.replace(charAt3, "_");
-    console.log(remove_charAt3);
-
-    question_word = "<h4 id='word_display'> Question: " + remove_charAt3 + "</h4>";
     input_box = "<br> Answer: <input type='text' id='input_check_box'>";
+    question_word = "<h4 id='word_display'> Question: " + num_1 + " × " + num_2 + "</h4>";
     check_button = "<br><br> <button class='btn btn-info' onclick='check()'>Submit & Check</button>";
     row = question_word + input_box + check_button;
     document.getElementById("output").innerHTML = row;
-    document.getElementById("word").value = "";
+    document.getElementById("num1").value = "";
+    document.getElementById("num2").value = "";
 }
 
 var question_turn = "player1";
@@ -45,9 +35,9 @@ var answer_turn = "player2";
 
 function check(){
     get_answer = document.getElementById("input_check_box").value;
-    answer = get_answer.toLowerCase();
-    console.log("Answer in lowercase: " + answer);
-    if(answer == word){
+    answer = num_1 * num_2;
+    console.log("the answer is: " + answer);
+    if(get_answer == answer){
         if(answer_turn == "player1"){
             player1_score += 1;
             document.getElementById("player1_score").innerHTML = player1_score;
